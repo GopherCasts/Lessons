@@ -5,6 +5,7 @@ import (
 	//"github.com/codegangsta/martini"
 	_ "github.com/lib/pq"
 	"log"
+	"fmt"
 )
 
 var db *sql.DB
@@ -43,8 +44,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		output += title
+		output += title + "\n"
 	}
 
-	log.Println(output)
+	fmt.Println(output)
 }

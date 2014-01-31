@@ -2,21 +2,13 @@ package main
 
 import (
 	"database/sql"
-	//"github.com/codegangsta/martini"
+	"github.com/codegangsta/martini"
 	_ "github.com/lib/pq"
 	"log"
-	"fmt"
 )
 
-var db *sql.DB
-
-func main() {
-	//m := martini.Classic()
-
-	//m.Run()
-
-	var err error
-	db, err = sql.Open("postgres", "dbname=lesson4 sslmode=disable")
+func SetupDB() *sql.DB {
+	db, err := sql.Open("postgres", "dbname=lesson4 sslmode=disable")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,25 +19,40 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var (
-		id int
-		title string
-		output string
-	)
+	return db
+}
 
-	rows, err := db.Query("SELECT * FROM books")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
+func main() {
+	m := martini.Classic()
 
-	for rows.Next() {
-		err := rows.Scan(&id, &title)
+	m.Map(SetupDB())
+
+	m.Get("/", func(db *sql.DB) string {
+		var (
+			id int
+			title string
+			author string
+			description string
+			output string
+		)
+
+		rows, err := db.Query("SELECT id, title, author, description FROM books")
 		if err != nil {
 			log.Fatal(err)
 		}
-		output += title + "\n"
-	}
+		defer rows.Close()
 
-	fmt.Println(output)
+		for rows.Next() {
+			err := rows.Scan(&id, &title, &author, &description)
+			if err != nil {
+				log.Fatal(err)
+			}
+			output += title + "\n"
+		}
+
+		return output
+	})
+
+	m.Run()
+
 }

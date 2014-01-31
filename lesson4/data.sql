@@ -1,14 +1,15 @@
+
 -- ----------------------------
 --  Sequence structure for books_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."books_id_seq";
-CREATE SEQUENCE "public"."books_id_seq" INCREMENT 1 START 6 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
+CREATE SEQUENCE "public"."books_id_seq" INCREMENT 1 START 5 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
 
 -- ----------------------------
 --  Sequence structure for reviews_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."reviews_id_seq";
-CREATE SEQUENCE "public"."reviews_id_seq" INCREMENT 1 START 1 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
+CREATE SEQUENCE "public"."reviews_id_seq" INCREMENT 1 START 2 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
 
 -- ----------------------------
 --  Table structure for books
@@ -26,12 +27,10 @@ WITH (OIDS=FALSE);
 --  Records of books
 -- ----------------------------
 BEGIN;
-INSERT INTO "public"."books" VALUES ('1', 'Swarley''s Big Day', 'Barney Stinson', null);
-INSERT INTO "public"."books" VALUES ('2', 'JerBear goes to the City', 'Garnee Smashington', null);
-INSERT INTO "public"."books" VALUES ('3', 'Life of a Certified G''', 'Jeremy Saenz', null);
-INSERT INTO "public"."books" VALUES ('4', 'All Around the Roundabound', 'Anakin Groundsitter', null);
-INSERT INTO "public"."books" VALUES ('5', 'Tommy Takes Seattle', 'Nate Beck', null);
-INSERT INTO "public"."books" VALUES ('6', 'Mastering Crossfire: You''ll get caught up in it', 'Freddie Wong', null);
+INSERT INTO "public"."books" VALUES ('1', 'JerBear goes to the City', 'Garnee Smashington', 'A young hipster bear seeks his fortune in the wild city of Irvine.');
+INSERT INTO "public"."books" VALUES ('2', 'Swarley''s Big Day', 'Barney Stinson', 'Putting his Playbook aside, one man seeks a lifetime of happiness.');
+INSERT INTO "public"."books" VALUES ('3', 'All Around the Roundabound', 'Anakin Groundsitter', 'The riveting tale of a young lad taking pod-racing lessons from an instructor with a dark secret.');
+INSERT INTO "public"."books" VALUES ('4', 'Mastering Crossfire: You''ll get caught up in it', 'Freddie Wong', 'It''s sometime in the future, the ultimate challenge...  Crossfire!');
 COMMIT;
 
 -- ----------------------------
@@ -48,8 +47,8 @@ WITH (OIDS=FALSE);
 -- ----------------------------
 --  Alter sequences owned by
 -- ----------------------------
-ALTER SEQUENCE "public"."books_id_seq" RESTART 7 OWNED BY "books"."id";
-ALTER SEQUENCE "public"."reviews_id_seq" RESTART 2 OWNED BY "reviews"."id";
+ALTER SEQUENCE "public"."books_id_seq" RESTART 6 OWNED BY "books"."id";
+ALTER SEQUENCE "public"."reviews_id_seq" RESTART 3 OWNED BY "reviews"."id";
 -- ----------------------------
 --  Primary key structure for table books
 -- ----------------------------

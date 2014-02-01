@@ -1,20 +1,24 @@
 package main
 
 import (
-	"fmt"
 	"database/sql"
-	"net/http"
+	"fmt"
 	"github.com/codegangsta/martini"
 	_ "github.com/lib/pq"
+	"net/http"
 )
 
 func SetupDB() *sql.DB {
 	db, err := sql.Open("postgres", "dbname=lesson4 sslmode=disable")
+	PanicIf(err)
+
+	return db
+}
+
+func PanicIf(err error) {
 	if err != nil {
 		panic(err)
 	}
-
-	return db
 }
 
 func main() {
@@ -28,21 +32,16 @@ func main() {
                            WHERE title ILIKE $1
                            OR author ILIKE $1
                            OR description ILIKE $1`, search)
-		if err != nil {
-			panic(err)
-		}
+		PanicIf(err)
 		defer rows.Close()
 
 		var title, author, description string
 		for rows.Next() {
 			err := rows.Scan(&title, &author, &description)
-			if err != nil {
-				panic(err)
-			}
+			PanicIf(err)
 			fmt.Fprintf(rw, "Title: %s\nAuthor: %s\nDescription: %s\n\n", title, author, description)
 		}
 	})
 
 	m.Run()
-
 }

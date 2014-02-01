@@ -5,26 +5,24 @@ import (
 	"fmt"
 	"github.com/codegangsta/martini"
 	_ "github.com/lib/pq"
-	"log"
 )
 
 func SetupDB() *sql.DB {
 	db, err := sql.Open("postgres", "dbname=lesson4 sslmode=disable")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	// Does the Database Exist?
 	err = db.Ping()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	return db
 }
 
 func FormatBook(title, author, description string) string {
-
 	return fmt.Sprintf("Title: %s\nAuthor: %s\nDescription: %s\n\n", title, author, description)
 }
 
@@ -39,14 +37,14 @@ func main() {
 
 		rows, err := db.Query("SELECT title, author, description FROM books")
 		if err != nil {
-			log.Fatal(err)
+			panic(err)
 		}
 		defer rows.Close()
 
 		for rows.Next() {
 			err := rows.Scan(&title, &author, &description)
 			if err != nil {
-				log.Fatal(err)
+				panic(err)
 			}
 			output += FormatBook(title, author, description)
 		}
@@ -70,14 +68,14 @@ func main() {
 
 		rows, err := db.Query(queryString)
 		if err != nil {
-			log.Fatal(err)
+			panic(err)
 		}
 		defer rows.Close()
 
 		for rows.Next() {
 			err := rows.Scan(&title, &author, &description)
 			if err != nil {
-				log.Fatal(err)
+				panic(err)
 			}
 			output += FormatBook(title, author, description)
 		}

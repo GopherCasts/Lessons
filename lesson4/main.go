@@ -27,7 +27,7 @@ func main() {
                            FROM books 
                            WHERE title ILIKE $1
                            OR author ILIKE $1
-                           OR description ILIKE $1;`, search)
+                           OR description ILIKE $1`, search)
 		if err != nil {
 			panic(err)
 		}

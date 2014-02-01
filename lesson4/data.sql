@@ -6,12 +6,6 @@ DROP SEQUENCE IF EXISTS "public"."books_id_seq";
 CREATE SEQUENCE "public"."books_id_seq" INCREMENT 1 START 5 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
 
 -- ----------------------------
---  Sequence structure for reviews_id_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."reviews_id_seq";
-CREATE SEQUENCE "public"."reviews_id_seq" INCREMENT 1 START 2 MAXVALUE 9223372036854775807 MINVALUE 1 CACHE 1;
-
--- ----------------------------
 --  Table structure for books
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."books";
@@ -33,28 +27,13 @@ INSERT INTO "public"."books" VALUES ('3', 'All Around the Roundabound', 'Anakin 
 INSERT INTO "public"."books" VALUES ('4', 'Mastering Crossfire: You''ll get caught up in it', 'Freddie Wong', 'It''s sometime in the future, the ultimate challenge...  Crossfire!');
 COMMIT;
 
--- ----------------------------
---  Table structure for reviews
--- ----------------------------
-DROP TABLE IF EXISTS "public"."reviews";
-CREATE TABLE "public"."reviews" (
-	"id" int4 NOT NULL DEFAULT nextval('reviews_id_seq'::regclass),
-	"content" text COLLATE "default",
-	"rating" int4 NOT NULL DEFAULT 0
-)
-WITH (OIDS=FALSE);
 
 -- ----------------------------
 --  Alter sequences owned by
 -- ----------------------------
-ALTER SEQUENCE "public"."books_id_seq" RESTART 6 OWNED BY "books"."id";
-ALTER SEQUENCE "public"."reviews_id_seq" RESTART 3 OWNED BY "reviews"."id";
+ALTER SEQUENCE "public"."books_id_seq" RESTART 4 OWNED BY "books"."id";
+
 -- ----------------------------
 --  Primary key structure for table books
 -- ----------------------------
 ALTER TABLE "public"."books" ADD PRIMARY KEY ("id") NOT DEFERRABLE INITIALLY IMMEDIATE;
-
--- ----------------------------
---  Primary key structure for table reviews
--- ----------------------------
-ALTER TABLE "public"."reviews" ADD PRIMARY KEY ("id") NOT DEFERRABLE INITIALLY IMMEDIATE;

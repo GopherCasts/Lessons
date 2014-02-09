@@ -1,0 +1,14 @@
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Description</th>
+  </tr>
+{{ range . }}
+  <tr>
+    <td>{{.Title}}</td>
+    <td>{{.Author}}</td>
+    <td>{{.Description}}</td>
+  </tr>
+{{ end }}
+</table>

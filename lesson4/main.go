@@ -32,9 +32,9 @@ func main() {
                            WHERE title ILIKE $1
                            OR author ILIKE $1
                            OR description ILIKE $1`, search)
+                defer rows.Close()
 		PanicIf(err)
-		defer rows.Close()
-
+		
 		var title, author, description string
 		for rows.Next() {
 			err := rows.Scan(&title, &author, &description)

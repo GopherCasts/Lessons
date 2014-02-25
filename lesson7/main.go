@@ -6,7 +6,6 @@ import (
 
 	"github.com/codegangsta/martini"
 	_ "github.com/lib/pq"
-	"github.com/martini-contrib/render"
 )
 
 func SetupDB() *sql.DB {
@@ -23,17 +22,11 @@ func PanicIf(err error) {
 
 func main() {
 	m := martini.Classic()
-	m.Use(render.Renderer())
 	m.Map(SetupDB())
 
-	m.Get("/login", GetLogin)
 	m.Post("/login", PostLogin)
 
 	m.Run()
-}
-
-func GetLogin(r render.Render) {
-	r.HTML(200, "login", nil)
 }
 
 func PostLogin(req *http.Request, db *sql.DB) (int, string) {

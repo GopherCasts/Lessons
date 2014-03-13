@@ -44,13 +44,12 @@ func main() {
 }
 
 func Signup(rw http.ResponseWriter, r *http.Request, db *sql.DB) {
-	pw, err := bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), bcrypt.DefaultCost)
+	name, email, password := r.FormValue("name"), r.FormValue("email"), r.FormValue("password")
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	PanicIf(err)
 
-	_, err = db.Exec("insert into users (name, password, email) values ($1, $2, $3)",
-		r.FormValue("name"),
-		pw,
-		r.FormValue("email"))
+	_, err = db.Exec("insert into users (name, email, password) values ($1, $2, $3)",
+		name, email, hashedPassword)
 
 	PanicIf(err)
 

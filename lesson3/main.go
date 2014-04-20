@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/codegangsta/martini"
+	"github.com/go-martini/martini"
 	"github.com/russross/blackfriday"
 	"net/http"
 )

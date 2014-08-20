@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"code.google.com/p/go.crypto/bcrypt"
-	"github.com/codegangsta/martini"
+	"github.com/go-martini/martini"
 	_ "github.com/lib/pq"
 	"github.com/martini-contrib/sessions"
 )

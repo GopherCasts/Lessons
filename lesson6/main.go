@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"github.com/codegangsta/martini"
+	"github.com/go-martini/martini"
 	_ "github.com/lib/pq"
 	"github.com/martini-contrib/render"
 	"net/http"

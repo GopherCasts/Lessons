@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/codegangsta/martini"
+	"github.com/go-martini/martini"
 	_ "github.com/lib/pq"
 )
 

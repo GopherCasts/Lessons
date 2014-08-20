@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/codegangsta/martini"
+	"github.com/go-martini/martini"
 	_ "github.com/lib/pq"
 	"net/http"
 )
